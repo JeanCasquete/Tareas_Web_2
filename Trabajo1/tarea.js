@@ -26,27 +26,27 @@ const Cliente = {
   const clientes = [
     {
       ID: 'C001',
-      Nombre: 'Juan Perez',
+      Nombre: 'Jean Pier',
       Identificacion: '123456789'
     },
     {
       ID: 'C002',
-      Nombre: 'Maria Rodriguez',
+      Nombre: 'Dani Perez',
       Identificacion: '987654321'
     },
     {
       ID: 'C003',
-      Nombre: 'Pedro Sanchez',
+      Nombre: 'Leonel Messi',
       Identificacion: '456789123'
     },
     {
       ID: 'C004',
-      Nombre: 'Ana Garcia',
+      Nombre: 'Ana de Armas',
       Identificacion: '789123456'
     },
     {
       ID: 'C005',
-      Nombre: 'Luisa Martinez',
+      Nombre: 'Roberto Martinez',
       Identificacion: '321654987'
     }
   ];
@@ -126,3 +126,41 @@ conceptos.forEach(concepto => {
   concepto.Gastos = gastos.filter(gasto => gasto.ID_Concepto === concepto.ID);
 });
 
+// Mostrar elementos de todos los arreglos de objetos
+// Utilizando for para recorrer todos los clientes y sus respectivos gastos
+for (let i = 0; i < clientes.length; i++) {
+  console.log(`Gastos de ${clientes[i].Nombre}:`);
+
+  clientes[i].Gastos.forEach(gasto => {
+    console.log(`${gasto.Fecha} - ${gasto.Hora}: ${gasto.Valor}`);
+  });
+
+  console.log('\n');
+}
+
+// Utilizando forEach para recorrer todos los conceptos y sus respectivos gastos
+conceptos.forEach(concepto => {
+  console.log(`Gastos del concepto ${concepto.Descripcion}:`);
+
+  concepto.Gastos.forEach(gasto => {
+    console.log(`${gasto.Fecha} - ${gasto.Hora}: ${gasto.Valor}`);
+  });
+
+  console.log('\n');
+});
+
+// Utilizando while para recorrer todos los gastos y mostrar sus detalles
+let i = 0;
+
+while (i < gastos.length) {
+  console.log(`Detalle del gasto ${gastos[i].ID}:`);
+  console.log(`Cliente: ${clientes.find(cliente => cliente.ID === gastos[i].ID_Cliente).Nombre}`);
+  console.log(`Concepto: ${conceptos.find(concepto => concepto.ID === gastos[i].ID_Concepto).Descripcion}`);
+  console.log(`Fecha: ${gastos[i].Fecha}`);
+  console.log(`Hora: ${gastos[i].Hora}`);
+  console.log(`Valor: ${gastos[i].Valor}`);
+
+  console.log('\n');
+  
+  i++;
+}
