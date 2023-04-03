@@ -1,6 +1,4 @@
 //Tarea de Casquete Rodriguez Jean Pier WEB 2 ''A''
-const {clientes, conceptos, gastos } = require('./datos.js');
-
 function vincularGastosClientes(clientes, gastos) {
     clientes.forEach(cliente => {
       cliente.Gastos = gastos.filter(gasto => gasto.ID_Cliente === cliente.ID);
@@ -57,17 +55,6 @@ function vincularGastosClientes(clientes, gastos) {
     }
   }
   
+
   
-  
-  vincularGastosClientes(clientes, gastos);
-  vincularGastosConceptos(conceptos, gastos);
-  
-  // Llamada a la función para mostrar los gastos de cada cliente
-  mostrarGastosPorCliente(clientes, gastos);
-  
-  // Llamada a la función para mostrar los gastos de cada concepto
-  mostrarGastosPorConcepto(conceptos, gastos);
-  
-  // Llamada a la función para mostrar los detalles de cada gasto
-  mostrarDetallesDeGastos(clientes, conceptos, gastos);
-  
+  module.exports= { vincularGastosClientes, vincularGastosConceptos, mostrarGastosPorCliente, mostrarGastosPorConcepto, mostrarDetallesDeGastos };
