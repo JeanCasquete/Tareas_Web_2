@@ -1,4 +1,4 @@
-
+//Tarea de Casquete Rodriguez Jean Pier WEB 2 ''A''
 const {clientes, conceptos, gastos } = require('./datos.js');
 
 function vincularGastosClientes(clientes, gastos) {

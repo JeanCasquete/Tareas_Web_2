@@ -1,3 +1,4 @@
+//Tarea de Casquete Rodriguez Jean Pier WEB 2 ''A''
 // Definir objeto Cliente
 const Cliente = {
   ID: '',
