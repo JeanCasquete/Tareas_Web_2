@@ -14,7 +14,7 @@ function vincularGastosClientes(clientes, gastos) {
   // Función para mostrar los gastos de cada cliente
   function mostrarGastosPorCliente(clientes, gastos) {
     for (let i = 0; i < clientes.length; i++) {
-      console.log(`Gastos de ${clientes[i].Nombre}:`);
+      console.log(`Gastos de ${clientes[i].Nombre} \nIdentificacion: ${clientes[i].Identificacion}:`);
   
       clientes[i].Gastos.forEach(gasto => {
         console.log(`${gasto.Fecha} - ${gasto.Hora}: ${gasto.Valor}`);
