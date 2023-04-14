@@ -91,5 +91,5 @@ function buscarGastoPorIdcallback(id, callback) {
     return gasto;
   };
   
-  //Exportamos las funciones
+  //Exportamos las funcioness
   module.exports= { buscarClientePorId, buscarGastoPorId,buscarClientePorIdcallback,buscarGastoPorIdcallback, buscarGastoPorIdPromise, buscarClientePorIdPromise, buscarClientePorIdAsync, buscarGastoPorIdClienteAsync };
