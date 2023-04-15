@@ -83,6 +83,8 @@ const Cliente = {
     }
   ];
 
+
+  //Exportamos los datos
   module.exports = {
     Cliente,
     Gasto,

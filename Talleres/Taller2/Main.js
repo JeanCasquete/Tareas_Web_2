@@ -4,7 +4,7 @@ const { buscarClientePorId, buscarGastoPorId, buscarGastoPorIdPromise, buscarCli
   try {
     const gasto = buscarGastoPorId('G001');
     console.log(gasto);
-  
+        //luego tener la id del cliente con esa misma buscamos el gasto
     const cliente = buscarClientePorId(gasto.ID_Cliente);
     console.log(cliente);
   } catch (error) {
@@ -22,6 +22,7 @@ buscarGastoPorIdcallback('G002', (error, gasto) => {
 
   console.log(gasto);
 
+      //luego tener la id del cliente con esa misma buscamos el gasto
   buscarClientePorIdcallback(gasto.ID_Cliente, (error, cliente) => {
     if (error) {
       console.log(error);
@@ -51,6 +52,7 @@ buscarGastoPorIdPromise('G003')
     try {
       const cliente = await buscarClientePorIdAsync('C003');
       console.log(cliente);
+      //luego tener la id del cliente con esa misma buscamos el gasto
       const gasto = await buscarGastoPorIdClienteAsync(cliente.ID);
       console.log(gasto);
     } catch (error) {
