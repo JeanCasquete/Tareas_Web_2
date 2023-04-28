@@ -48,65 +48,84 @@ const Gasto = mongoose.model("Gasto", gastoSchema);
 
 
 
-const pedirPago = async ()=>{
+const añadirDatos = async ()=>{
     try {
 
         const estadoDeLaConexion =  await mongoose.connect(connecionURL)
-        const newclient = new Cliente({//Creando atributos para cliente
-          id: "1",
-          nombre: "Jin",
-          apellido: "Rodriguez",
-          identificacion: "1314683010"
-      });
-      const newconcep = new Concepto({ //Crear atributos para concepto
-          idcliente:newclient._id ,
-          producto: "Laptop msi",
-          precio: "2000",
-          descripcion: "negro mate",
-      });
+
+        const newclient = new Cliente({id: "2",nombre: "Jin",apellido: "Perez",identificacion: "1314683010"});
+        const newconcep = new Concepto({ idcliente:newclient._id ,producto: "ROUTERS",precio: "2000",descripcion: "negro mate",});
 
       //Guarda los datos de concepto y cliente en la base de datos
-      const savecliente = await newclient.save();
-      const saveconcepto = await newconcep.save();
+        const savecliente = await newclient.save();
+        const saveconcepto = await newconcep.save();
     
-     
-        const gasto1 =  new Gasto({//Creando los atributos para Gasto
-            id:"1",
-            idcliente: savecliente._id,
-            idconcepto: saveconcepto._id,
-            fecha:"14 de abril 2020",
-            hora: "15:30",
-            valor:130
-        })
+       const gasto1 =  new Gasto({id:"1",idcliente: savecliente._id,idconcepto: saveconcepto._id,fecha:"14 de abril 2010",hora: "15:30",
+       valor:130})
+
         const savegasto =  await gasto1.save();
-         console.log(gasto1._doc);
 
-         //Mostrar los clientes y los gastos
-         const clienteEncontrado = await Cliente.find({})
-         console.log(clienteEncontrado);
-         const gastosEncontrados = await Gasto.find({});
-         console.log(gastosEncontrados);
+         //Mostrar los gastos, clientes y conceptos
+         const ResultCliente = await Cliente.find({})
+         const ResultConcepto = await Concepto.find({});
+         const ResultGastos = await Gasto.find({});
 
+         
+         //TODOS LOS CICLOS
+         console.log("--MOSTRAR CLIENTE POR MEDIANTE FOR--")
 
+         for (let index = 0; index < ResultCliente.length; index++) {
+             const element = ResultCliente[index];
+             console.log(element)
+         }
 
-        
+        console.log("--MOSTRAR CONCEPTO POR MEDIANTE FOREACH--")
+        ResultConcepto.forEach(element => {
+            console.log(element)
+        });
+
+        console.log("--MOSTRAR GASTOS POR MEDIANTE FOR-OF--")
+        for (const iterator of ResultGastos) {
+            console.log(iterator)
+        }
+     
     } catch (error) {
         console.log(error);   
     }
 }
-//pedirPago();
 
-const actualizarCliente = async (id, actualizacion) => {
-    try {
-        await mongoose.connect(connecionURL);  
-      const resultado = await Cliente.findByIdAndUpdate(id, actualizacion, { new: true });
-      console.log(resultado);
-    } catch (error) {
-      console.log(error);
-    }
+const actualizarGasto = async (id, actualizacion) => {
+  try {
+    await mongoose.connect(connecionURL);  
+    const resultado = await Gasto.findByIdAndUpdate(id, actualizacion, { new: true });
+    console.log('Gasto Actualizado correctamente');
+    console.log(resultado);
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  actualizarCliente("64499b7de4f01d37bd0bbc3b", { nombre: "Juan", apellido: "Pérez" });
+
+
+const eliminarGasto = async (id) => {
+  try {
+    await mongoose.connect(connecionURL);  
+    const resultado = await Gasto.findByIdAndDelete(id);
+    console.log(' Gasto Eliminado correctamente');
+  } catch (error) {
+    console.log(error);
+  }
+}
+  
+
+
+  //Ejecutar las funciones 
+  
+  añadirDatos();
+  actualizarGasto("644c485b5c63e73699db2a3a", { hora: "23:00",valor: 420 });
+  
+  //USAR PARA ELIMINAR UN GASTO 
+ // eliminarGasto("644c4454aec7d0abbad8953c")
 
 
 
