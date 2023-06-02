@@ -11,7 +11,8 @@ const getProducts= async (req, res = response )=>{
     const [ sum, pagos ] = await Promise.all([
         Pago.countDocuments(query),
         Pago.find(query)
-        .populate('concepto','name status')
+        .populate('concepto','name descripcion status')
+        .populate('cliente','nombre status')
         .skip(Number(since))
         .limit(Number(limit))
     ])

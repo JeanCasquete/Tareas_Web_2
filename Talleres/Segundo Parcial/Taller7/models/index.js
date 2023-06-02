@@ -1,10 +1,10 @@
-const Pagos =  require('./pago');
+const Pago =  require('./pago');
 const Concepto =  require('./concepto');
 const Cliente =  require('./cliente');
 
 
 module.exports ={
-    Pagos,
+    Pago,
     Concepto,
     Cliente
 }
