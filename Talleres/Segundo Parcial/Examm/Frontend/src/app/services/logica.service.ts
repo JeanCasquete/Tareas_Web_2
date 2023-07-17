@@ -15,16 +15,25 @@ export class LogicaService {
 
 
   getAllData(): Observable<Iclientes > {
-    return this.http.get<Iclientes >(`${this.baseURL}/clientes`)
+    return this.http.get<Iclientes >(`${this.baseURL}/pagos`)
+  }
+  
+  getActivos(): Observable<Iclientes > {
+    return this.http.get<Iclientes >(`${this.baseURL}/pagos/activos`)
+  }
+
+    
+  getInactivos(): Observable<Iclientes > {
+    return this.http.get<Iclientes >(`${this.baseURL}/pagos/inactivos`)
   }
   postData(data: any): Observable<Icliente> {
-    return this.http.post<Icliente>(`${this.baseURL}/clientes`, data)
+    return this.http.post<Icliente>(`${this.baseURL}/pagos`, data)
   }
   updateData(data: any, id: string): Observable<Icliente> {
-    return this.http.put<Icliente>(`${this.baseURL}/clientes/${id}`, data)
+    return this.http.put<Icliente>(`${this.baseURL}/pagos/${id}`, data)
   }
   deleteData(id: string): Observable<any> {
-    return this.http.delete(`${this.baseURL}/clientes/${id}`)
+    return this.http.delete(`${this.baseURL}/pagos/${id}`)
 }
 }
 

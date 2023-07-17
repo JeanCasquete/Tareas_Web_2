@@ -5,9 +5,11 @@ const { createProduct,
      getProduct, 
      getProducts,
      updateProduct,
-     deleteProduct } = require('../controllers').Pago;
+     deleteProduct,
+    getActivePayments } = require('../controllers').Pago;
 
-const { validateFields } = require('../middlewares')
+const { validateFields } = require('../middlewares');
+const { getPagosInactivos, getPagosActivos } = require('../controllers/pago');
 
 const router = Router();
 
@@ -15,7 +17,12 @@ const router = Router();
 
 router.get('/', getProducts);
 
-router.get('/:id', [ 
+router.get('/activos', getPagosActivos);
+router.get('/inactivos', getPagosInactivos);
+
+
+
+router.get('busca/:id', [ 
     check('id', 'Este no es un ID de Mongo correcto').isMongoId() 
  ]  , getProduct);
 

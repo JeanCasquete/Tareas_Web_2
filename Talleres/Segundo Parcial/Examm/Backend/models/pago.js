@@ -30,7 +30,6 @@ const PagoSchema = Schema(
         },
         status:{
             type: Boolean,
-            default: true,
             required:true
         }
 
@@ -38,7 +37,7 @@ const PagoSchema = Schema(
 );
 
 PagoSchema.methods.toJSON = function(){
-    const { __v,  status,  ...data   } =  this.toObject();
+    const { __v,  ...data   } =  this.toObject();
     return data;
 }
 

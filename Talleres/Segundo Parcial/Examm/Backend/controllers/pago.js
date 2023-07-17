@@ -2,27 +2,23 @@ const { response } = require('express');
 const { Pago } = require('../models');
 
 
-const getProducts= async (req, res = response )=>{
-
-    //GET http://localhost:3000/products   ?limit=100?since=1
-    const { limit = 10 , since=0 } =  req.query;
-    const query = { status:true };
-
-    const [ sum, pagos ] = await Promise.all([
-        Pago.countDocuments(query),
-        Pago.find(query)
-        .populate('concepto','name descripcion status')
-        .populate('cliente','nombre status')
+const getProducts = async (req, res = response) => {
+    const { limit = 10, since = 0 } = req.query;
+    const query = {};
+  
+    const [sum, pagos] = await Promise.all([
+      Pago.countDocuments(query),
+      Pago.find(query)
         .skip(Number(since))
-        .limit(Number(limit))
-    ])
+        .limit(Number(limit)),
+    ]);
   
     res.json({
-      sum, 
-      pagos
-    })
-    
-}
+      sum,
+      pagos,
+    });
+  };
+  
 const getProduct= async (req, res =  response)=>{
     const {id} = req.params
     const pago=  await Pago.findById(id).populate('concepto');
@@ -52,7 +48,7 @@ const createProduct= async (req, res = response)=>{
 }
 const updateProduct= async (req, res=response)=>{
     const {id} = req.params;
-    const { status, ...data } =  req.body;
+    const {...data } =  req.body;
     // console.log(id,data)
     const updatedPago =  await Pago.findByIdAndUpdate(id,data, {new: true} )
     res.json(updatedPago);
@@ -63,10 +59,51 @@ const deleteProduct= async (req, res = response)=>{
     res.json(deletedPago);
 }
 
+
+const getPagosInactivos= async (req, res = response )=>{
+
+    const { limit = 10 , since=0 } =  req.query;
+    const query = { status:false };
+
+    const [ sum, pagos ] = await Promise.all([
+        Pago.countDocuments(query),
+        Pago.find(query)
+        .skip(Number(since))
+        .limit(Number(limit))
+    ])
+  
+    res.json({
+      sum, 
+      pagos
+    })
+    
+}
+
+const getPagosActivos= async (req, res = response )=>{
+
+    const { limit = 10 , since=0 } =  req.query;
+    const query = { status:true };
+
+    const [ sum, pagos ] = await Promise.all([
+        Pago.countDocuments(query),
+        Pago.find(query)
+        .skip(Number(since))
+        .limit(Number(limit))
+    ])
+  
+    res.json({
+      sum, 
+      pagos
+    })
+    
+}
+
 module.exports = {
     getProduct,
     getProducts,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getPagosInactivos,
+    getPagosActivos
 };

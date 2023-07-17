@@ -7,7 +7,8 @@ const {
     getConcepto,
     getConceptos,
     updateConceptos,
-    deleteConceptos
+    deleteConceptos,
+
 } = require('../controllers').Concepto;
 
 const { validateFields } = require('../middlewares')
